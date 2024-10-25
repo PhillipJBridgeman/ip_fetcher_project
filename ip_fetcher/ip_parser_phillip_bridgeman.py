@@ -32,6 +32,10 @@ class MyHTMLParser(HTMLParser):
     def get_ip(self) -> str | None:
         """Return the extracted IP address."""
         return self.ip
+    
+    def error(self, message: str) -> None:
+        """Handle any errors that occur during parsing."""
+        print(f"Error parsing HTML content: {message}")
 
 def fetch_html(url: str) -> str:
     """Fetch HTML content from the given URL."""
@@ -79,7 +83,9 @@ def main():
     if args.debug:
         logger = logging.getLogger(__name__)
         if not logger.hasHandlers():  # Only configure logging if it hasn't been configured
-            logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+            logging.basicConfig(
+                level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s'
+                )
         log_ip_address(ip_address, logger)
 
 if __name__ == "__main__":
