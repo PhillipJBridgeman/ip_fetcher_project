@@ -66,12 +66,10 @@ def main():
     """
     Main function to fetch and display the public IP address.
     """
-    # Argument parsing for debug flag
     parser = argparse.ArgumentParser(description="Fetch and display the public IP address.")
     parser.add_argument('--debug', action='store_true', help="Enable logging of the IP address.")
     args = parser.parse_args()
 
-    # Fetch the IP address
     ip_address = get_ip_address()
 
     if ip_address:
@@ -79,10 +77,9 @@ def main():
     else:
         print("IP address not found.")
 
-    # If --debug flag is passed, configure logging
     if args.debug:
         logger = logging.getLogger(__name__)
-        if not logger.hasHandlers():  # Only configure logging if it hasn't been configured
+        if not logger.hasHandlers():
             logging.basicConfig(
                 level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s'
                 )
